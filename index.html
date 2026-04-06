@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GGC Executive Command Center</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; width: 100%; border-radius: 8px; }
+        .card-map { padding: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="navbar navbar-expand-md navbar-light d-print-none">
+            <div class="container-xl">
+                <h1 class="navbar-brand navbar-brand-autodark d-none-xs pr-0 pr-md-3">
+                    <span class="badge bg-blue text-blue-fg">GGC</span> Strategic Infrastructure Command
+                </h1>
+            </div>
+        </header>
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <h2 class="page-title">Global Portfolio Overview</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-cards">
+                        <div class="col-md-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="bg-primary text-white avatar">EXE</span></div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">12 Active Projects</div>
+                                            <div class="text-secondary">Across 5 Regions</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="bg-green text-white avatar">VAL</span></div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">$4.2B Valuation</div>
+                                            <div class="text-secondary">Infrastructure Assets</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="bg-yellow text-white avatar">RSK</span></div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">Medium-High Risk</div>
+                                            <div class="text-secondary">Strategic Monitoring</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="bg-info text-white avatar">MOU</span></div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">8 Pending MOUs</div>
+                                            <div class="text-secondary">Govt Partnerships</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header"><h3 class="card-title">Strategic Project Locations</h3></div>
+                                <div class="card-body card-map"><div id="map"></div></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header"><h3 class="card-title">Project Pipeline</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        <thead><tr><th>Project</th><th>Region</th><th>Tech</th><th>Status</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>Baghdad Solar</td><td>Iraq</td><td>Solar</td><td><span class="badge bg-info">MOU Signed</span></td></tr>
+                                            <tr><td>Almaty Wind</td><td>Kazakhstan</td><td>Wind</td><td><span class="badge bg-success">Feasibility</span></td></tr>
+                                            <tr><td>Freetown Grid</td><td>Sierra Leone</td><td>Grid</td><td><span class="badge bg-warning">Negotiation</span></td></tr>
+                                            <tr><td>Karachi Power</td><td>Pakistan</td><td>Hybrid</td><td><span class="badge bg-info">MOU Signed</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([20, 45], 3);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        var projects = [
+            { name: "Baghdad Solar", lat: 33.3152, lon: 44.3661 },
+            { name: "Almaty Wind", lat: 43.2389, lon: 76.8897 },
+            { name: "Freetown Grid", lat: 8.484, lon: -13.2344 },
+            { name: "Karachi Power", lat: 24.8607, lon: 67.0011 }
+        ];
+        projects.forEach(p => { L.marker([p.lat, p.lon]).addTo(map).bindPopup(p.name); });
+    </script>
+</body>
+</html>
